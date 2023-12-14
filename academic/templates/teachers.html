@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="content-wrapper">
+
+<div class="container">
+ <div class="float-right">
+          <a href="{% url 'students:add-student' %}" class="btn btn-outline-dark m-2">Add Student</a>
+      </div>
+    <br><br>
+<div class="block">
+    <div class="float-right">
+       <div class="m-2">
+            <form method="get">
+             <div class="btn-group">
+                 <input type="text" class="form-control" name="q">
+            <button class="btn btn-dark">search</button>
+             </div>
+        </form>
+       </div>
+</div>
+    <br><br>
+</div>
+          <table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Name</th>
+      <th>Faculty</th>
+      <th>Status</th>
+      <th>Class</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for teacher in teachers %}
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="{{ teacher.img.url }}"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+              <a href="{% url 'academic:teacher_detail' teacher.id %}">
+            <p class="fw-bold mb-1">{{ teacher.first_name }} {{ teacher.last_name }}</p>
+            <p class="text-muted mb-0">{{ teacher.email }}</p>
+                  </a>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Faculty</p>
+        <p class="text-muted mb-0">{{ teacher.specs }}</p>
+      </td>
+      <td>
+          {{ teacher.cost }}
+      </td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          Edit
+        </button>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+      </div>
+{% endblock content %}

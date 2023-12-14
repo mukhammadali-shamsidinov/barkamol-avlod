@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="content-wrapper">
+
+<div class="container">
+ <div class="float-right">
+          <a href="{% url 'students:add-student' %}" class="btn btn-outline-dark m-2">Add Student</a>
+      </div>
+    <br><br>
+<div class="block">
+    <div class="card mx-auto w-50 text-center p-5">
+      <div class="d-block text-center">
+            <img height="100" width="100" src="{{ teacher.img.url }}" class="rounded-circle" alt="">
+      </div>
+        <h2>FullName:{{ teacher.first_name }} {{ teacher.last_name }}</h2>
+        <p>Email:{{ teacher.email }}</p>
+        <p>Phone number:{{ teacher.phone_num }}</p>
+        <p>cost:{{ teacher.cost }}$</p>
+        <p>Spec:{{ teacher.specs }}</p>
+    </div>
+</div>
+</div>
+      </div>
+{% endblock content %}

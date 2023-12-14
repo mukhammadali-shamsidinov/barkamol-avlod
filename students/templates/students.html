@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="content-wrapper">
+
+<div class="container">
+ <div class="float-right">
+          <a href="{% url 'students:add-student' %}" class="btn btn-outline-dark m-2">Add Student</a>
+      </div>
+    <br><br>
+<div class="block">
+    <div class="float-right">
+       <div class="m-2">
+            <form method="get">
+             <div class="btn-group">
+                 <input type="text" class="form-control" name="q">
+            <button class="btn btn-dark">search</button>
+             </div>
+        </form>
+       </div>
+</div>
+    <br><br>
+</div>
+          <table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Name</th>
+      <th>Faculty</th>
+      <th>Status</th>
+      <th>Class</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for student in students %}
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <img
+              src="{{ student.img.url }}"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+              />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{ student.first_name }} {{ student.last_name }}</p>
+            <p class="text-muted mb-0">{{ student.email }}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">Faculty</p>
+        <p class="text-muted mb-0">{{ student.facultet }}</p>
+      </td>
+      <td>
+          {% if student.status == 'process' %}
+        <span class="badge badge-danger rounded-pill d-inline">{{ student.status }}</span>
+          {% elif  student.status == 'pending' %}
+                  <span class="badge badge-info rounded-pill d-inline">{{ student.status }}</span>
+              {% else %}
+                                <span class="badge badge-success rounded-pill d-inline">{{ student.status }}</span>
+          {% endif %}
+      </td>
+      <td>
+          {{ student.classes.name }}{{ student.classes.type }}
+      </td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          Edit
+        </button>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+      </div>
+{% endblock content %}
